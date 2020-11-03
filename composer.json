@@ -1,9 +1,9 @@
 {
-  "name": "islandora/controlled_access_terms",
-  "description": "Drupal module for subjects and agents",
+  "name": "bseeger/idc_field_widgets",
+  "description": "Drupal module for iDC field widgets",
   "type": "drupal-module",
   "keywords": ["Drupal", "Islandora"],
-  "homepage": "https://github.com/Islandora/controlled_access_terms",
+  "homepage": "https://github.com/bseeger/idc_field_widgets",
   "support": {
     "issues": "https://github.com/Islandora/documentation/issues"
   },
@@ -27,14 +27,9 @@
   "license": "GPL-2.0-or-later",
   "authors": [
     {
-      "name": "Islandora Foundation",
-      "email": "community@islandora.ca",
+      "name": "Bethany Seeger",
+      "email": "bseeger@jhu.edu",
       "role": "Owner"
-    },
-    {
-      "name": "Seth Shaw",
-      "email": "seth.shaw@unlv.edu",
-      "role": "Maintainer"
     }
   ]
 }
