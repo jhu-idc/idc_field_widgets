@@ -1,0 +1,81 @@
+<?php
+
+/**
+ * @file
+ * Controlled Access Terms stuff.
+ */
+
+use Drupal\jsonld\Normalizer\NormalizerBase;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\controlled_access_terms\EDTFConverter;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Entity\FieldConfig;
+
+/**
+ * Implements hook_rdf_namespaces().
+ */
+function controlled_access_terms_rdf_namespaces() {
+  return [
+    'wgs84_pos' => 'http://www.w3.org/2003/01/geo/wgs84_pos#',
+    'org' => 'https://www.w3.org/TR/vocab-org/#org:',
+    'xs' => 'http://www.w3.org/2001/XMLSchema#',
+  ];
+}
+
+/**
+ * Implements hook_jsonld_alter_normalized_array().
+ */
+function controlled_access_terms_jsonld_alter_normalized_array(EntityInterface $entity, array &$normalized, array $context) {
+  if (isset($normalized['@graph']) && is_array($normalized['@graph'])) {
+    foreach ($entity->getFieldDefinitions() as $field => $field_definition) {
+      if (!empty($entity->get($field)->getValue())) {
+          if ($field_definition->getType() == 'string_with_lang') {
+              /*
+          foreach ($entity->get($field)->getValue() as $value) {
+            if (empty($value['target_id'])) {
+              \Drupal::logger('controlled_access_terms')->warning("Missing target entity for %field in %entity_type/%id (%bundle)",
+              [
+                '%field' => $field,
+                '%entity_type' => $entity->getEntityTypeId(),
+                '%bundle' => $entity->bundle(),
+                '%id' => $entity->id(),
+              ]);
+              continue;
+            }
+            $predicate = NormalizerBase::escapePrefix($value['rel_type'], $context['namespaces']);
+            $referenced_entity = \Drupal::entityTypeManager()->getStorage($field_definition->getSetting('target_type'))->load($value['target_id']);
+            if (empty($referenced_entity)) {
+              \Drupal::logger('controlled_access_terms')->warning("Invalid target entity for %field in %entity_type/%id (%bundle)",
+              [
+                '%field' => $field,
+                '%entity_type' => $entity->getEntityTypeId(),
+                '%bundle' => $entity->bundle(),
+                '%id' => $entity->id(),
+              ]);
+              continue;
+            }
+            // We are assuming the first graph is the one corresponding
+            // to the node/taxonomy_term we are modifying.
+            $normalized['@graph'][0][$predicate][] = [
+              '@id' => $referenced_entity->toUrl('canonical', ['absolute' => TRUE])->setRouteParameter('_format', 'jsonld')->toString(),
+            ];
+          } */
+        }
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_jsonld_field_mappings().
+ */
+function idc_field_widgets_jsonld_field_mappings() {
+    //TODO - implement this to work with the string witih the language attached: 
+    //example: "String Blah Blah"@eng
+  return [
+    "string_with_lang" => [
+      "@type" => "xsd:anyURI",
+    ],
+  ];
+}
+
