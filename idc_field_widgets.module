@@ -7,14 +7,13 @@
 
 use Drupal\jsonld\Normalizer\NormalizerBase;
 use Drupal\Core\Entity\EntityInterface;
-use Drupal\controlled_access_terms\EDTFConverter;
 use Drupal\field\Entity\FieldStorageConfig;
 use Drupal\field\Entity\FieldConfig;
 
 /**
  * Implements hook_rdf_namespaces().
  */
-function controlled_access_terms_rdf_namespaces() {
+function idc_field_widgets_rdf_namespaces() {
   return [
     'wgs84_pos' => 'http://www.w3.org/2003/01/geo/wgs84_pos#',
     'org' => 'https://www.w3.org/TR/vocab-org/#org:',
@@ -25,7 +24,7 @@ function controlled_access_terms_rdf_namespaces() {
 /**
  * Implements hook_jsonld_alter_normalized_array().
  */
-function controlled_access_terms_jsonld_alter_normalized_array(EntityInterface $entity, array &$normalized, array $context) {
+function idc_field_widgets_jsonld_alter_normalized_array(EntityInterface $entity, array &$normalized, array $context) {
   if (isset($normalized['@graph']) && is_array($normalized['@graph'])) {
     foreach ($entity->getFieldDefinitions() as $field => $field_definition) {
       if (!empty($entity->get($field)->getValue())) {

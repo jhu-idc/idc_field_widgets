@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\controlled_access_terms\Plugin\Field\FieldType;
+namespace Drupal\idc_field_widgets\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
@@ -11,9 +11,9 @@ use Drupal\Core\TypedData\DataDefinition;
  * Implements a String With Lang field.
  *
  * @FieldType(
- *   id = "string_with_lang"
+ *   id = "string_with_lang",
  *   label = @Translation("String With Language"),
- *   module = "controlled_access_terms",
+ *   module = "idc_field_widgets",
  *   description = @Translation("Implements a field with a language tag attached"),
  *   default_formatter = "string_with_lang_default",
  *   default_widget = "string_with_lang_default",
@@ -74,15 +74,14 @@ class StringWithLang extends EntityReferenceItem {
   /**
    * {@inheritdoc}
    */
-/*
+  /*
   public function fieldSettingsForm(array $form, FormStateInterface $form_state) {
     $element = parent::fieldSettingsForm($form, $form_state);
 
-    $element['rel_types'] = [
+    $element['the_string'] = [
       '#type' => 'textarea',
-      '#title' => t('Available Relations'),
-      '#default_value' => $this->encodeTextSettingsField($this->getSetting('rel_types')),
-      '#element_validate' => [[get_class($this), 'validateValues']],
+      '#title' => t('The String'),
+      '#default_value' => $this->encodeTextSettingsField($this->getSetting('the_string')),
       '#required' => TRUE,
       '#min' => 1,
       '#description' => '<p>' . t('Enter one value per line, in the format key|label.') .
@@ -90,11 +89,11 @@ class StringWithLang extends EntityReferenceItem {
       '<br/>' . t("Keys may not contain dots ('.'). They will be removed if used.") .
       '<br/>' . t('The label is optional: if a line contains a single string, it will be used as key and label.') .
       '</p>',
-    ];
+   ];
 
     return $element;
   }
- */
+*/
   /**
    * Convenience method allowing the Formatter to get the rel_types.
    *
@@ -103,7 +102,7 @@ class StringWithLang extends EntityReferenceItem {
    */ /*
   public function getRelTypes() {
     return $this->getSetting('rel_types');
-  } 
+  }
 */
 
   /**
@@ -173,18 +172,11 @@ class StringWithLang extends EntityReferenceItem {
    *   The current state of the form for the form this element belongs to.
    *
    * @see \Drupal\Core\Render\Element\FormElement::processPattern()
-   */
-   /*
+   *//*
   public static function validateValues(array $element, FormStateInterface $form_state) {
-    $values = static::extractPipedValues($element['#value']);
 
-    if (!is_array($values)) {
-      $form_state->setError($element, t('Allowed values list: invalid input.'));
-    }
-    else {
       // We may want to validate key values in the future...
       $form_state->setValueForElement($element, $values);
-    }
-  }*/
+  } */
 
 }
