@@ -35,6 +35,7 @@ class StringWithLangWidget extends EntityReferenceAutocompleteWidget {
         'target_bundles' => array('taxonomy_term', 'language'),
       ),
       '#placeholder' => "a string",
+      '#default_value' => isset($item->the_string) ? $item->the_string : '',
       '#title' => t('The String'),
       '#weight' => -1
     ];
