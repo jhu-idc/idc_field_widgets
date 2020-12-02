@@ -68,9 +68,9 @@ class StringWithLangTag extends EntityReferenceItem {
   /**
    * {@inheritdoc}
    */
-  public static function getPreconfiguredOptions() {
-       return [];
-  }
+ // public static function getPreconfiguredOptions() {
+  //     return [];
+ // }
 
 /**
    * {@inheritdoc}

@@ -21,9 +21,6 @@
     "drupal/coder": "*",
     "sebastian/phpcpd": "*"
   },
-  "suggest": {
-    "drupal/name": "Provides western-centric structured names."
-  },
   "license": "GPL-2.0-or-later",
   "authors": [
     {

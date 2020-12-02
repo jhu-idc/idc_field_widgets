@@ -24,13 +24,11 @@ class StringWithLangTagFormatter extends EntityReferenceLabelFormatter {
   public function viewElements(FieldItemListInterface $items, $langcode) {
 
     $elements = parent::viewElements($items, $langcode);
-    foreach ($items as $key => $item) {
-      print_r("Key is '$key': '$item'");
-      $elements[$key]['#prefix'] = $item->the_string . '  (';
-      $elements[$key]['#suffix'] = ')';
+    foreach ($items as $delta => $item) {
+      $elements[$delta]['#prefix'] = $item->the_string . '  (';
+      $elements[$delta]['#suffix'] = ')';
     }
 
-    print_r($elements);
     return $elements;
   }
 }
