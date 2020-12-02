@@ -67,10 +67,11 @@ class StringWithLangTag extends EntityReferenceItem {
 
   /**
    * {@inheritdoc}
+   * This function makes it so the options of FieldType do not repeat in the select box
    */
- // public static function getPreconfiguredOptions() {
-  //     return [];
- // }
+  public static function getPreconfiguredOptions() {
+      return [];
+  }
 
 /**
    * {@inheritdoc}
