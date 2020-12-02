@@ -10,14 +10,14 @@ use Drupal\Core\Form\FormStateInterface;
  * Plugin implementation of the typed note widget.
  *
  * @FieldWidget(
- *   id = "string_with_lang_tag_default",,
+ *   id = "string_with_lang_tag_widget",
  *   label = @Translation("String With Language Tag Widget"),
  *   field_types = {
  *     "string_with_lang_tag"
  *   }
  * )
  */
-class StringWithTagLangWidget extends EntityReferenceAutocompleteTagWidget {
+class StringWithLangTagWidget extends EntityReferenceAutocompleteWidget {
   /**
    * {@inheritdoc}
    */
@@ -27,12 +27,13 @@ class StringWithTagLangWidget extends EntityReferenceAutocompleteTagWidget {
     $item =& $items[$delta];
     $settings = $item->getFieldDefinition()->getSettings();
 
-    /* @TODO use these to adjust the entity reference */
-    // '#target_type' => 'taxonomy_term',
-    // '#selection_settings' => array(
-    //  'target_bundles' => array('taxonomy_term', 'language'),
-    //  )
-    
+   /* limit the entity reference to language taxonomy */
+    //$widget['target_id']['#target_type'] = 'taxonomy_term';
+    $widget['target_id']['#selection_settings'] = array(
+      'target_bundles' => array('taxonomy_term', 'language'),
+    );
+
+    /* add a string value to this widget */
     $widget['the_string'] = [
       '#type' => 'textfield',
       '#placeholder' => "a string",

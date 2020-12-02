@@ -1,6 +1,6 @@
 <?php
 
-namespace Drupal\controlled_access_terms\Plugin\Field\FieldType;
+namespace Drupal\idc_field_widgets\Plugin\Field\FieldType;
 
 use Drupal\Core\Field\Plugin\Field\FieldType\EntityReferenceItem;
 use Drupal\Core\Field\FieldStorageDefinitionInterface;
@@ -8,15 +8,15 @@ use Drupal\Core\Form\FormStateInterface;
 use Drupal\Core\TypedData\DataDefinition;
 
 /**
- * Implements a String With Lang Tag field.
+ * Implements a String With Language Tag field.
  *
  * @FieldType(
- *   id = "string_with_lang_tag"
+ *   id = "string_with_lang_tag",
  *   label = @Translation("String With Language Tag"),
  *   module = "idc_field_widgets",
  *   description = @Translation("Implements a string field with a language tag attached"),
- *   default_formatter = "string_with_lang_tag_default",
- *   default_widget = "string_with_lang_tag_default",
+ *   default_formatter = "string_with_lang_tag_formatter",
+ *   default_widget = "string_with_lang_tag_widget",
  *   list_class = "\Drupal\Core\Field\EntityReferenceFieldItemList",
  * )
  */
@@ -28,8 +28,8 @@ class StringWithLangTag extends EntityReferenceItem {
   public static function schema(FieldStorageDefinitionInterface $field_definition) {
     $schema = parent::schema($field_definition);
     $schema['columns']['the_string'] = [
-      'type' => 'text',
-      'size' => 'tiny',
+      'type' => 'varchar_ascii',
+      'length' => '512',
     ];
 
     return $schema;
@@ -68,6 +68,31 @@ class StringWithLangTag extends EntityReferenceItem {
   /**
    * {@inheritdoc}
    */
+  public static function getPreconfiguredOptions() {
+       return [];
+  }
+
+/**
+   * {@inheritdoc}
+   */
   public static function defaultFieldSettings() {
     return ['the_string' => []] + parent::defaultFieldSettings();
   }
+
+  /**
+   * Callback for settings form.
+   *
+   * @param array $element
+   *   An associative array containing the properties and children of the
+   *   generic form element.
+   * @param \Drupal\Core\Form\FormStateInterface $form_state
+   *   The current state of the form for the form this element belongs to.
+   *
+   * @see \Drupal\Core\Render\Element\FormElement::processPattern()
+   */
+  public static function validateValues(array $element, FormStateInterface $form_state) {
+
+      // We may want to validate key values in the future...
+    //  $form_state->setValueForElement($element, $values);
+  }
+}
