@@ -1,5 +1,4 @@
-# WIP.... 
-
+# This module is unused and was originally intended to do what the reference_value_pair module does.  We do not use, nor need this module. 
 # iDC Field Widgets
 
 This module provides Field Widgets for our Islandora project, iDC, at JHU Sheridan Libraries.
